@@ -129,9 +129,6 @@
                 <a href="{{ route('login') }}" class="inline-block bg-white text-blue-600 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition duration-300 shadow-lg transform hover:-translate-y-1">
                     Masuk
                 </a>
-                <a href="{{ route('register') }}" class="inline-block bg-blue-500 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-400 transition duration-300 shadow-lg transform hover:-translate-y-1 border border-white">
-                    Daftar
-                </a>
             </div>
         </div>
     </div>

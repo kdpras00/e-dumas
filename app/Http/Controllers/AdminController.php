@@ -13,9 +13,19 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     // Users Management
-    public function indexUsers()
+    public function indexUsers(Request $request)
     {
-        $users = User::with(['level', 'rt.rw'])->get();
+        $query = User::with(['level', 'rt.rw']);
+
+        if ($request->has('role')) {
+            if ($request->role == 'warga') {
+                $query->where('user_level_id', 1); // Assuming 1 is Masyarakat
+            } elseif ($request->role == 'petugas') {
+                $query->where('user_level_id', 2); // Assuming 2 is Petugas
+            }
+        }
+
+        $users = $query->get();
         return view('admin.users.index', compact('users'));
     }
 
@@ -261,7 +271,12 @@ class AdminController extends Controller
             'rw_id' => 'required|exists:rw,id',
         ]);
 
-        Rt::create([
+        // Prevent duplicate RT in the same RW
+        if (\App\Models\Rt::where('rt', $request->rt)->where('rw_id', $request->rw_id)->exists()) {
+            return back()->withErrors(['rt' => 'RT ' . $request->rt . ' sudah ada di RW ini.']);
+        }
+
+        \App\Models\Rt::create([
             'rt' => $request->rt,
             'rw_id' => $request->rw_id,
         ]);

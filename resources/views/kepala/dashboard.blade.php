@@ -98,7 +98,7 @@
 
     <!-- Quick Access Menu -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <a href="{{ route('admin.users.index') }}" class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 hover:shadow-lg transition flex items-center group">
+        <a href="{{ route('admin.users.index', ['role' => 'warga']) }}" class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 hover:shadow-lg transition flex items-center group">
             <div class="p-4 bg-blue-50 rounded-full text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -115,7 +115,7 @@
             </div>
         </a>
 
-        <a href="{{ route('admin.petugas.index') }}" class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 hover:shadow-lg transition flex items-center group">
+        <a href="{{ route('admin.users.index', ['role' => 'petugas']) }}" class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 hover:shadow-lg transition flex items-center group">
             <div class="p-4 bg-purple-50 rounded-full text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -131,7 +131,7 @@
                 </svg>
             </div>
         </a>
-
+    </div>
     <!-- Recent Reports Table -->
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 min-h-[400px]">
         <div class="px-8 py-6 border-b border-gray-100 flex justify-between items-center">
@@ -147,6 +147,7 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider w-16">No</th>
+                        <th scope="col" class="px-6 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">Tiket ID</th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Subjek</th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Kategori</th>
                         <th scope="col" class="px-6 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
@@ -158,6 +159,7 @@
                     @forelse($pengaduans as $index => $pengaduan)
                     <tr class="hover:bg-blue-50/50 transition duration-150 group">
                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-gray-500">{{ $index + 1 }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-bold text-blue-600">#{{ $pengaduan->id }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ Str::limit($pengaduan->subject, 40) }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
@@ -186,7 +188,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="px-6 py-12 text-center text-gray-500">
+                        <td colspan="7" class="px-6 py-12 text-center text-gray-500">
                             <div class="flex flex-col items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />

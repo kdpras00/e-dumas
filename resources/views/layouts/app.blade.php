@@ -34,7 +34,7 @@
                     <a href="{{ route('about') }}" class="hover:text-blue-600">Tentang E-DUMAS</a>
                     <span class="text-gray-400">|</span>
                     @if (request()->routeIs('login'))
-                        <a href="{{ route('register') }}" class="bg-white text-blue-900 px-6 py-2 rounded-full shadow-sm hover:shadow-md transition">Daftar</a>
+
                     @else
                         <a href="{{ route('login') }}" class="bg-white text-blue-900 px-6 py-2 rounded-full shadow-sm hover:shadow-md transition">Masuk</a>
                     @endif

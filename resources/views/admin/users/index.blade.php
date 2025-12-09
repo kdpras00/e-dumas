@@ -53,6 +53,7 @@
                             <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Nama Lengkap</th>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">NIK</th>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Email</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Level</th>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">RT/RW</th>
                             <th scope="col" class="px-6 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider w-48">Aksi</th>
                         </tr>
@@ -76,6 +77,11 @@
                                 {{ $user->email }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $user->user_level_id == 3 ? 'bg-purple-100 text-purple-800' : ($user->user_level_id == 2 ? 'bg-blue-100 text-blue-800' : ($user->user_level_id == 4 ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800')) }}">
+                                    {{ $user->level->user_level ?? '-' }}
+                                </span>
+                            </td>
+                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                                 @if($user->rt)
                                     RT {{ $user->rt->rt }} / RW {{ $user->rt->rw->rw }}
                                 @else

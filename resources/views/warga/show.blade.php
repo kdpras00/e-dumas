@@ -22,18 +22,18 @@
         </nav>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Left Column: Main Content (Restored Original Layout) -->
+            <!-- Left Column: Main Content -->
             <div class="lg:col-span-2 space-y-8">
                 
                 <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-8">
-                    <!-- Header Title (Original Style) -->
+                    <!-- Header Title -->
                     <div class="bg-gradient-to-r from-blue-600 to-blue-800 px-8 py-6">
                         <h2 class="text-3xl font-bold text-white tracking-wide">Pengaduan Header</h2>
                         <div class="h-0.5 w-full bg-blue-400/30 mt-4 rounded-full"></div>
                     </div>
                     
                     <div class="p-8 bg-blue-50/30">
-                        <!-- Rincian Section (Original Style) -->
+                        <!-- Rincian Section -->
                         <div class="border border-blue-200 rounded-lg overflow-hidden mb-8 shadow-sm">
                             <div class="bg-blue-100/50 px-6 py-3 border-b border-blue-200">
                                 <h3 class="text-blue-900 text-lg font-bold">Rincian</h3>
@@ -84,13 +84,12 @@
                             </div>
                         </div>
         
-                        <!-- Pengaduan Detail Section Title (Original Style) -->
+                        <!-- Riwayat Section -->
                         <div class="mb-6 mt-10">
                             <h2 class="text-3xl font-bold text-gray-800 tracking-wide">Riwayat Tindak Lanjut</h2>
                             <div class="h-0.5 w-full bg-gray-300 mt-2 rounded-full"></div>
                         </div>
         
-                        <!-- Detail Blocks (Original Style) -->
                         <div class="space-y-8">
                             @foreach($pengaduan->details as $index => $detail)
                                 <div class="border border-gray-400 rounded-lg overflow-hidden shadow-md bg-blue-50/20">
@@ -141,8 +140,8 @@
                     </div>
                 </div>
 
-                <!-- Response Form (Only for Petugas/Admin) -->
-                @if(in_array(Auth::user()->user_level_id, [2, 3]))
+                <!-- Response Form (Only for Petugas - Level 2) -->
+                @if(Auth::user()->user_level_id == 2)
                 <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
                     <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
                         <h3 class="text-lg font-bold text-gray-800">Berikan Tanggapan</h3>
@@ -153,22 +152,18 @@
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <label class="block text-gray-700 text-sm font-bold mb-2">Status Saat Ini</label>
-                                    <div class="flex items-center">
-                                        @php
-                                            $currStatusId = $pengaduan->latestDetail->status->id;
-                                            $currStatusName = $pengaduan->latestDetail->status->status;
-                                            $badgeColor = match($currStatusId) {
-                                                1 => 'bg-yellow-100 text-yellow-800',
-                                                2 => 'bg-blue-100 text-blue-800',
-                                                3 => 'bg-green-100 text-green-800',
-                                                4 => 'bg-gray-100 text-gray-800',
-                                                default => 'bg-gray-100 text-gray-800'
-                                            };
-                                        @endphp
-                                        <span class="px-3 py-2 rounded-lg font-bold text-sm {{ $badgeColor }}">
-                                            {{ $currStatusName }}
-                                        </span>
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Change Status</label>
+                                    <div class="relative">
+                                        <select name="status_id" class="block w-full bg-white border border-gray-300 text-gray-800 font-bold py-2.5 px-3 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 shadow-sm appearance-none">
+                                            @foreach($statuses as $status)
+                                                <option value="{{ $status->id }}" {{ $pengaduan->latestDetail->status_id == $status->id ? 'selected' : '' }}>
+                                                    {{ $status->status }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                        </div>
                                     </div>
                                 </div>
                                 
@@ -179,44 +174,15 @@
                             </div>
         
                             <div class="mb-6">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="tanggapan">Tanggapan</label>
-                                <textarea class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 h-24 resize-none" id="tanggapan" name="tanggapan" placeholder="Tulis rincian tindak lanjut disini..." required></textarea>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="tanggapan">Detail / Tanggapan</label>
+                                <textarea class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 h-24 resize-none" id="tanggapan" name="tanggapan" placeholder="Contoh: Sudah diperbaiki, sekarang tidak banjir lagi" required></textarea>
                             </div>
 
-                            @php
-                                $nextStatusId = match($currStatusId) {
-                                    1 => 2, // Open -> On Progress
-                                    2 => 3, // On Progress -> Resolved
-                                    3 => 4, // Resolved -> Close
-                                    4 => null, // Closed -> End
-                                    default => null
-                                };
-                            @endphp
-
-                            @if($nextStatusId)
-                                <input type="hidden" name="status_id" value="{{ $nextStatusId }}">
-                                <div class="flex justify-end">
-                                    @if($currStatusId == 1)
-                                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition flex items-center gap-2 transform hover:scale-105" type="submit">
-                                            <span>🚀</span> Mulai Tindak Lanjut
-                                        </button>
-                                    @elseif($currStatusId == 2)
-                                        <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition flex items-center gap-2 transform hover:scale-105" type="submit">
-                                            <span>✅</span> Selesaikan Tindak Lanjut
-                                        </button>
-                                    @elseif($currStatusId == 3)
-                                        <button class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition flex items-center gap-2 transform hover:scale-105" type="submit">
-                                            <span>🔒</span> Tutup Laporan
-                                        </button>
-                                    @endif
-                                </div>
-                            @else
-                                <div class="flex justify-end">
-                                    <button class="bg-gray-300 text-gray-500 font-bold py-2 px-6 rounded-lg cursor-not-allowed" type="button" disabled>
-                                        Laporan Telah Ditutup
-                                    </button>
-                                </div>
-                            @endif
+                            <div class="flex justify-end">
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-md transition flex items-center gap-2 transform hover:scale-105" type="submit">
+                                    Reply
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -233,7 +199,8 @@
 
                         <div class="space-y-10 relative">
                             @php
-                                $orderedStatuses = [4, 3, 2, 1]; // Close, Resolved, On Progress, Open
+                                // Ordered for display: Cancel/Done at top, then On Progress, Open
+                                $orderedStatuses = [5, 4, 2, 1]; 
                             @endphp
 
                             @foreach($orderedStatuses as $statusId)
@@ -245,8 +212,9 @@
                                     $statusName = match($statusId) {
                                         1 => 'Open',
                                         2 => 'On Progress',
-                                        3 => 'Resolved',
-                                        4 => 'Close',
+                                        3 => 'Resolved', // unused
+                                        4 => 'Done',
+                                        5 => 'Cancel',
                                         default => 'Unknown'
                                     };
                                 @endphp
