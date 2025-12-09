@@ -217,6 +217,14 @@
                                         5 => 'Cancel',
                                         default => 'Unknown'
                                     };
+
+                                    $displayNumber = match($statusId) {
+                                        1 => 1,
+                                        2 => 2,
+                                        4 => 3,
+                                        5 => 4,
+                                        default => $statusId
+                                    };
                                 @endphp
 
                                 <div class="relative pl-8">
@@ -230,7 +238,7 @@
                                     <!-- Content -->
                                     <div>
                                         <h4 class="text-base font-bold {{ $isReached ? 'text-blue-600' : 'text-gray-400' }}">
-                                            {{ $statusId }}. {{ $statusName }}
+                                            {{ $displayNumber }}. {{ $statusName }}
                                         </h4>
                                         @if($history)
                                             <p class="text-xs text-blue-400 font-medium mt-1">
