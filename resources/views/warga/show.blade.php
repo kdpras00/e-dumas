@@ -199,8 +199,8 @@
 
                         <div class="space-y-10 relative">
                             @php
-                                // Ordered for display: Cancel/Done at top, then On Progress, Open
-                                $orderedStatuses = [5, 4, 2, 1]; 
+                                // Ordered for display: Open(1) -> On Progress(2) -> Done(3) -> Close(4)
+                                $orderedStatuses = [1, 2, 3, 4]; 
                             @endphp
 
                             @foreach($orderedStatuses as $statusId)
@@ -212,17 +212,16 @@
                                     $statusName = match($statusId) {
                                         1 => 'Open',
                                         2 => 'On Progress',
-                                        3 => 'Resolved', // unused
-                                        4 => 'Done',
-                                        5 => 'Cancel',
+                                        3 => 'Done',
+                                        4 => 'Close',
                                         default => 'Unknown'
                                     };
 
                                     $displayNumber = match($statusId) {
                                         1 => 1,
                                         2 => 2,
-                                        4 => 3,
-                                        5 => 4,
+                                        3 => 3,
+                                        4 => 4,
                                         default => $statusId
                                     };
                                 @endphp

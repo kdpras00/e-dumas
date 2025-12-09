@@ -17,7 +17,7 @@ class StatusSeeder extends Seeder
         $statuses = [
             1 => 'Open', 
             2 => 'On Progress', 
-            3 => 'Resolved', 
+            3 => 'Done', 
             4 => 'Close'
         ];
         

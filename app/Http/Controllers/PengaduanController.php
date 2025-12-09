@@ -84,19 +84,23 @@ class PengaduanController extends Controller
             $currentStatusId = $pengaduan->latestDetail->status_id;
             
             // Logic:
-            // 1 (Open) -> 2 (On Progress), 4 (Done), 5 (Cancel)
-            // 2 (On Progress) -> 4 (Done), 5 (Cancel)
-            // 4 (Done) -> Terminal
+            // 1 (Open) -> 2 (On Progress), 3 (Done), 5 (Cancel)
+            // 2 (On Progress) -> 3 (Done), 5 (Cancel)
+            // 3 (Done) -> 4 (Close)
+            // 4 (Close) -> Terminal
             // 5 (Cancel) -> Terminal
             
             $allowedIds = [$currentStatusId]; // Always allow remaining on current status
             
             if ($currentStatusId == 1) {
-                // Open can go to On Progress, Done, Cancel
-                $allowedIds = array_merge($allowedIds, [2, 4, 5]);
+                // Open can go to On Progress, Done, Close, Cancel
+                $allowedIds = array_merge($allowedIds, [2, 3, 4, 5]);
             } elseif ($currentStatusId == 2) {
-                // On Progress can go to Done, Cancel
-                $allowedIds = array_merge($allowedIds, [4, 5]);
+                // On Progress can go to Done, Close, Cancel
+                $allowedIds = array_merge($allowedIds, [3, 4, 5]);
+            } elseif ($currentStatusId == 3) {
+                 // Done can go to Close
+                 $allowedIds = array_merge($allowedIds, [4]);
             }
             
             $statuses = Status::whereIn('id', $allowedIds)->get();
@@ -137,9 +141,11 @@ class PengaduanController extends Controller
             
             if ($requestedStatusId == $currentStatusId) {
                 $isValidTransition = true; // Just adding a comment/response without changing status
-            } elseif ($currentStatusId == 1 && in_array($requestedStatusId, [2, 4, 5])) {
+            } elseif ($currentStatusId == 1 && in_array($requestedStatusId, [2, 3, 4, 5])) {
                 $isValidTransition = true;
-            } elseif ($currentStatusId == 2 && in_array($requestedStatusId, [4, 5])) {
+            } elseif ($currentStatusId == 2 && in_array($requestedStatusId, [3, 4, 5])) {
+                $isValidTransition = true;
+            } elseif ($currentStatusId == 3 && $requestedStatusId == 4) {
                 $isValidTransition = true;
             }
             
