@@ -199,7 +199,7 @@
 
                         <div class="space-y-10 relative">
                             @php
-                                // Ordered for display: Open(1) -> On Progress(2) -> Done(3) -> Close(4)
+                                // Ordered for display: Open(1) -> On Progress(2) -> Done(3) -> Cancel(4)
                                 $orderedStatuses = [1, 2, 3, 4]; 
                             @endphp
 
@@ -213,7 +213,7 @@
                                         1 => 'Open',
                                         2 => 'On Progress',
                                         3 => 'Done',
-                                        4 => 'Close',
+                                        4 => 'Cancel',
                                         default => 'Unknown'
                                     };
 

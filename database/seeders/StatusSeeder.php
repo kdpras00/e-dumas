@@ -12,13 +12,13 @@ class StatusSeeder extends Seeder
      */
     public function run(): void
     {
-        // Update existing statuses to match new requirement if possible, or just create new ones.
-        // For simplicity and to match the user's request explicitly:
+        // Status flow: Open -> On Progress/Done/Cancel, On Progress -> Done/Cancel
+        // Done and Cancel are final states
         $statuses = [
             1 => 'Open', 
             2 => 'On Progress', 
             3 => 'Done', 
-            4 => 'Close'
+            4 => 'Cancel'  // Changed from 'Close' to 'Cancel'
         ];
         
         foreach ($statuses as $id => $status) {

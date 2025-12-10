@@ -63,12 +63,12 @@
             </div>
         </div>
 
-        <!-- Resolved -->
+        <!-- Done -->
         <div class="bg-white p-5 rounded-2xl shadow-md hover:shadow-lg transition duration-300 border-l-4 border-green-500 relative overflow-hidden group">
             <div class="flex justify-between items-start">
                 <div>
-                    <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Resolved</p>
-                    <h3 class="text-2xl font-bold text-gray-800">{{ $resolved }}</h3>
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Done</p>
+                    <h3 class="text-2xl font-bold text-gray-800">{{ $done }}</h3>
                     <p class="text-[10px] text-gray-400 mt-1">Telah selesai</p>
                 </div>
                 <div class="p-2 bg-green-50 rounded-xl text-green-600 group-hover:bg-green-600 group-hover:text-white transition duration-300">
@@ -79,13 +79,13 @@
             </div>
         </div>
 
-        <!-- Close -->
+        <!-- Cancel -->
         <div class="bg-white p-5 rounded-2xl shadow-md hover:shadow-lg transition duration-300 border-l-4 border-gray-500 relative overflow-hidden group">
             <div class="flex justify-between items-start">
                 <div>
-                    <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Close</p>
-                    <h3 class="text-2xl font-bold text-gray-800">{{ $close }}</h3>
-                    <p class="text-[10px] text-gray-400 mt-1">Ditutup</p>
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Cancel</p>
+                    <h3 class="text-2xl font-bold text-gray-800">{{ $cancel }}</h3>
+                    <p class="text-[10px] text-gray-400 mt-1">Dibatalkan</p>
                 </div>
                 <div class="p-2 bg-gray-50 rounded-xl text-gray-600 group-hover:bg-gray-600 group-hover:text-white transition duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

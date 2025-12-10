@@ -31,22 +31,22 @@ class DashboardController extends Controller
             case 3:
                 $totalPengaduan = \App\Models\PengaduanHeader::count();
                 $pengaduans = \App\Models\PengaduanHeader::with('latestDetail.status')->get();
-                // Status IDs: 1: Open, 2: On Progress, 3: Resolved, 4: Close
+                // Status IDs: 1: Open, 2: On Progress, 3: Done, 4: Cancel
                 $open = $pengaduans->where('latestDetail.status_id', 1)->count();
                 $onProgress = $pengaduans->where('latestDetail.status_id', 2)->count();
-                $resolved = $pengaduans->where('latestDetail.status_id', 3)->count();
-                $close = $pengaduans->where('latestDetail.status_id', 4)->count();
+                $done = $pengaduans->where('latestDetail.status_id', 3)->count();
+                $cancel = $pengaduans->where('latestDetail.status_id', 4)->count();
                 
-                return view('admin.dashboard', compact('totalPengaduan', 'open', 'onProgress', 'resolved', 'close'));
+                return view('admin.dashboard', compact('totalPengaduan', 'open', 'onProgress', 'done', 'cancel'));
             case 4:
                 $totalPengaduan = \App\Models\PengaduanHeader::count();
                 $pengaduans = \App\Models\PengaduanHeader::with(['latestDetail.status', 'kategori'])->latest()->get();
                 $open = $pengaduans->where('latestDetail.status_id', 1)->count();
                 $onProgress = $pengaduans->where('latestDetail.status_id', 2)->count();
-                $resolved = $pengaduans->where('latestDetail.status_id', 3)->count();
-                $close = $pengaduans->where('latestDetail.status_id', 4)->count();
+                $done = $pengaduans->where('latestDetail.status_id', 3)->count();
+                $cancel = $pengaduans->where('latestDetail.status_id', 4)->count();
                 
-                return view('kepala.dashboard', compact('totalPengaduan', 'open', 'onProgress', 'resolved', 'close', 'pengaduans'));
+                return view('kepala.dashboard', compact('totalPengaduan', 'open', 'onProgress', 'done', 'cancel', 'pengaduans'));
             default:
                 return abort(403, 'Unauthorized action.');
         }
