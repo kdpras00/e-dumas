@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
         // Routes accessible by Admin and Kepala Kelurahan (Read Only for Kepala)
         Route::middleware(['role:Admin,Kepala'])->group(function() {
             Route::get('/users', [\App\Http\Controllers\AdminController::class, 'indexUsers'])->name('users.index');
+            Route::get('/users/{id}', [\App\Http\Controllers\AdminController::class, 'showUser'])->where('id', '[0-9]+')->name('users.show');
             Route::get('/petugas', [\App\Http\Controllers\AdminController::class, 'indexPetugas'])->name('petugas.index');
             // Route for Admin to manage/view all complaints (List View)
             Route::get('/kelola-pengaduan', [\App\Http\Controllers\AdminController::class, 'indexPengaduan'])->name('pengaduan.index');

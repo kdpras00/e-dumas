@@ -29,6 +29,12 @@ class AdminController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
+    public function showUser($id)
+    {
+        $user = User::with(['level', 'rt.rw', 'kategori'])->findOrFail($id);
+        return view('admin.users.show', compact('user'));
+    }
+
     public function createUser()
     {
         $levels = UserLevel::all();
