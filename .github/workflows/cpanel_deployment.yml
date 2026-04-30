@@ -47,7 +47,7 @@ jobs:
 
             echo "📦 Install NPM..."
             # Gunakan npm langsung karena server sudah pakai v24.14.1
-            npm install && npm run build:filament
+            npm install && npm run build
 
             # 4. Optimasi Laravel
             if [ -f "artisan" ]; then
