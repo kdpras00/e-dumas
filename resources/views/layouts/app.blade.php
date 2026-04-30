@@ -23,8 +23,9 @@
             <div class="flex items-center gap-3">
                 <!-- Logo -->
                 <div class="flex items-center gap-2">
-                    <img src="{{ asset('img/logo-1.png') }}" alt="E-Dumas Logo" class="h-10 w-auto object-contain drop-shadow-sm">
-                    <span class="text-3xl font-bold text-blue-900 tracking-tighter font-serif" style="text-shadow: 0 1px 2px rgba(0,0,0,0.05);">e-dumas</span>
+                    <h1>
+                        E-DUMAS
+                    </h1>
                 </div>
             </div>
             <div class="flex items-center gap-6 text-sm font-semibold text-gray-700">
