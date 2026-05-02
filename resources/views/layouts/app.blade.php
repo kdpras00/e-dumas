@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-DUMAS - Pengaduan Masyarakat</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #EBF5FF; /* Light blue background from design */
         }
         .font-serif {
@@ -18,46 +18,38 @@
     </style>
 </head>
 <body class="text-gray-800 antialiased min-h-screen flex flex-col">
-    <nav class="py-6">
+    <nav class="absolute top-0 left-0 w-full z-50 py-6 transition-all duration-300">
         <div class="container mx-auto px-8 flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <!-- Logo -->
-                <div class="flex items-center gap-2">
-                    <h1>
-                        E-DUMAS
-                    </h1>
-                </div>
+                <img src="{{ asset('storage/images/e-dumaslogo2.png') }}" alt="Logo" class="h-10 w-auto {{ Request::is('/') || Request::is('about') || Request::is('login') ? 'brightness-0 invert' : '' }}">
             </div>
-            <div class="flex items-center gap-6 text-sm font-semibold text-gray-700">
+            <div class="flex items-center gap-8 text-sm font-medium {{ Request::is('/') || Request::is('about') || Request::is('login') ? 'text-white' : 'text-gray-700' }}">
                 @guest
-                    <a href="/" class="hover:text-blue-600">Beranda</a>
-                    <span class="text-gray-400">|</span>
-                    <a href="{{ route('about') }}" class="hover:text-blue-600">Tentang E-DUMAS</a>
-                    <span class="text-gray-400">|</span>
-                    @if (request()->routeIs('login'))
-
-                    @else
-                        <a href="{{ route('login') }}" class="bg-white text-blue-900 px-6 py-2 rounded-full shadow-sm hover:shadow-md transition">Masuk</a>
+                    <a href="/" class="hover:text-blue-200 transition relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-200 after:transition-all hover:after:w-full">Beranda</a>
+                    <a href="{{ route('about') }}" class="hover:text-blue-200 transition relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-200 after:transition-all hover:after:w-full">Tentang E-DUMAS</a>
+                    @if (!request()->routeIs('login'))
+                        <a href="{{ route('login') }}" class="bg-white/20 backdrop-blur-md text-white border border-white/30 px-6 py-2.5 rounded-full hover:bg-white hover:text-blue-900 transition-all font-bold shadow-lg">Masuk</a>
                     @endif
                 @endguest
 
                 @auth
                     <form action="{{ route('logout') }}" method="POST" class="inline">
                         @csrf
-                        <button type="submit" class="bg-white text-blue-900 px-6 py-2 rounded-full shadow-sm hover:shadow-md transition">Logout</button>
+                        <button type="submit" class="bg-white/20 backdrop-blur-md text-white border border-white/30 px-6 py-2.5 rounded-full hover:bg-white hover:text-blue-900 transition-all font-bold shadow-lg">Logout</button>
                     </form>
                 @endauth
             </div>
         </div>
     </nav>
 
-    <main class="flex-grow flex items-center justify-center px-4">
+    <main class="flex-grow flex flex-col">
         @yield('content')
     </main>
     
-    <footer class="py-6 text-center text-gray-500 text-sm">
-        &copy; {{ date('Y') }} E-DUMAS. All rights reserved.
-    </footer>
+    @if(!Request::is('login') && !Request::is('register') && !Request::is('forgot-password'))
+        @include('partials.footer')
+    @endif
 
     <!-- Lightbox Modal -->
     <div id="lightbox" class="fixed inset-0 z-50 hidden bg-black/90 flex items-center justify-center p-4" onclick="closeLightbox()">

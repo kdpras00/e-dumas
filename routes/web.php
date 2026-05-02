@@ -7,7 +7,14 @@ Route::get('/', function () {
     if (auth()->check()) {
         return redirect()->route('dashboard');
     }
-    return view('home');
+    
+    // Ambil laporan terbaru beserta detail dan user
+    $laporans = \App\Models\PengaduanHeader::with(['latestDetail.user', 'latestDetail.status'])
+                ->orderBy('created_at', 'desc')
+                ->take(6)
+                ->get();
+                
+    return view('home', compact('laporans'));
 })->name('home');
 
 Route::get('/about', function () {
@@ -20,8 +27,6 @@ Route::get('/forgot-password', function () {
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post');
-// Route::get('/register', [AuthController::class, 'register'])->name('register');
-// Route::post('/register', [AuthController::class, 'storeRegister'])->name('register.store');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
