@@ -4,7 +4,7 @@
             <!-- Brand & Description -->
             <div class="col-span-1 md:col-span-1">
                 <div class="flex items-center gap-3 mb-6">
-                    <img src="{{ asset('storage/images/e-dumaslogo2.png') }}" alt="Logo" class="h-10 w-auto brightness-0 invert">
+                    <img src="{{ asset('images/e-dumaslogo2.png') }}" alt="Logo" class="h-10 w-auto brightness-0 invert">
                 </div>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">
                     Platform pengaduan masyarakat yang transparan dan responsif untuk lingkungan yang lebih baik. Suara anda adalah prioritas kami.

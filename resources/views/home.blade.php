@@ -22,7 +22,7 @@
                 <div class="md:w-1/2 relative">
                     <!-- Glassmorphism Card -->
                     <div class="">
-                        <img src="{{ asset('storage/images/bannerimages.png') }}" alt="Banner Image" class="w-full h-auto">
+                        <img src="{{ asset('images/bannerimages.png') }}" alt="Banner Image" class="w-full h-auto">
                     </div>
                 </div>
             </div>

@@ -22,7 +22,7 @@
         <div class="container mx-auto px-8 flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <!-- Logo -->
-                <img src="{{ asset('storage/images/e-dumaslogo2.png') }}" alt="Logo" class="h-10 w-auto {{ Request::is('/') || Request::is('about') || Request::is('login') ? 'brightness-0 invert' : '' }}">
+                <img src="{{ asset('images/e-dumaslogo2.png') }}" alt="Logo" class="h-10 w-auto {{ Request::is('/') || Request::is('about') || Request::is('login') ? 'brightness-0 invert' : '' }}">
             </div>
             <div class="flex items-center gap-8 text-sm font-medium {{ Request::is('/') || Request::is('about') || Request::is('login') ? 'text-white' : 'text-gray-700' }}">
                 @guest

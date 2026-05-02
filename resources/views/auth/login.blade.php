@@ -9,7 +9,7 @@
         <div class="hidden md:flex flex-1 flex-col items-center justify-center relative md:border-r border-white/20 md:pr-20 h-[70vh]">
             <div class="relative w-full max-w-lg">
                 <div class="absolute inset-0 bg-teal-500 rounded-full opacity-20 blur-3xl transform scale-150"></div>
-                <img src="{{ asset('storage/images/bannerimages.png') }}" alt="E-Dumas Illustration" class="h-auto w-full object-contain drop-shadow-2xl relative z-10 transform hover:scale-105 transition duration-500">
+                <img src="{{ asset('images/bannerimages.png') }}" alt="E-Dumas Illustration" class="h-auto w-full object-contain drop-shadow-2xl relative z-10 transform hover:scale-105 transition duration-500">
             </div>
         </div>
 
