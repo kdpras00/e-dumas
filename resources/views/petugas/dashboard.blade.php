@@ -4,7 +4,7 @@
 <div class="container mx-auto px-4 py-8">
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 min-h-[600px] relative">
         <!-- Header -->
-        <div class="bg-gradient-to-r from-blue-600 to-blue-800 px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="bg-gradient-to-br from-blue-600 to-blue-800 px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
                 <h1 class="text-3xl font-bold text-white tracking-wide">Dashboard Petugas</h1>
                 <p class="text-blue-100 mt-1 text-sm">Menampilkan pengaduan kategori: <span class="font-bold text-white bg-blue-500/30 px-2 py-0.5 rounded">{{ Auth::user()->kategori->kategori }}</span></p>

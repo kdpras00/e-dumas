@@ -35,8 +35,6 @@
             </div>
         </div>
         <!-- Decorative Circle -->
-        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"></div>
-        <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"></div>
     </div>
 
     <!-- Detail Card -->

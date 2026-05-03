@@ -56,26 +56,30 @@
                                 $userInitial = strtoupper(substr($userName, 0, 2));
                             @endphp
                             <!-- Dynamic Card -->
-                            <div class="min-w-full md:min-w-[calc(33.333%-16px)] bg-white p-8 rounded-3xl border border-gray-100 flex flex-col justify-between text-left hover:border-blue-200 transition">
-                                <div>
-                                    <div class="flex justify-between items-start mb-4 pb-4 border-b border-gray-100">
-                                        <h3 class="text-lg font-bold text-gray-900 pr-4 line-clamp-2">{{ $laporan->subject }}</h3>
-                                        <div class="flex flex-col items-end shrink-0">
-                                            <span class="text-gray-500 text-xs font-bold">{{ $laporan->created_at->format('d M Y') }}</span>
-                                            <span class="text-gray-400 text-[10px]">{{ $laporan->created_at->format('H:i') }} WIB</span>
-                                        </div>
+                            <div class="min-w-full md:min-w-[calc(33.333%-16px)] bg-white p-8 rounded-3xl border border-gray-100 flex flex-col hover:border-blue-200 transition">
+                                <!-- Top: Profile -->
+                                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
+                                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-xs">{{ $userInitial }}</div>
+                                    <div class="text-left">
+                                        <p class="text-xs font-bold text-gray-900">{{ $userName }}</p>
+                                        <p class="text-[10px] text-gray-500 font-medium">Warga</p>
                                     </div>
-                                    <p class="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3 text-justify">{{ $detail->detail_masalah }}</p>
                                 </div>
+
+                                <!-- Center: Title -->
+                                <div class="flex-grow flex flex-col justify-center py-4 text-center">
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2 leading-tight">
+                                        {{ $laporan->subject }}
+                                    </h3>
+                                </div>
+
+                                <!-- Bottom: Date & Status -->
                                 <div class="flex items-center justify-between pt-6 border-t border-gray-50">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-xs">{{ $userInitial }}</div>
-                                        <div>
-                                            <p class="text-xs font-bold text-gray-900">{{ $userName }}</p>
-                                            <p class="text-[10px] text-gray-500 font-medium">Warga</p>
-                                        </div>
+                                    <div class="flex flex-col items-start">
+                                        <span class="text-gray-500 text-[10px] font-bold">{{ $laporan->created_at->format('d M Y') }}</span>
+                                        <span class="text-gray-400 text-[9px]">{{ $laporan->created_at->format('H:i') }} WIB</span>
                                     </div>
-                                    <div class="text-xs font-bold">
+                                    <div class="text-[10px] font-bold">
                                         <span class="text-gray-400 font-medium">Status : </span>
                                         <span class="{{ $statusColor }}">{{ $statusName }}</span>
                                     </div>

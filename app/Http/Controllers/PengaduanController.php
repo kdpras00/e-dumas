@@ -30,11 +30,16 @@ class PengaduanController extends Controller
         try {
             DB::beginTransaction();
 
+            // Generate Ticket Number (Format: YYYYMMDD-XXX)
+            $today = date('Ymd');
+            $countToday = PengaduanHeader::where('no_pengaduan', 'like', $today . '-%')->count();
+            $noPengaduan = $today . '-' . str_pad($countToday + 1, 3, '0', STR_PAD_LEFT);
+
             // Create Header
             $header = PengaduanHeader::create([
                 'subject' => $request->subject,
                 'kategori_id' => $request->kategori_id,
-                'no_pengaduan' => time(), // Simple unique number
+                'no_pengaduan' => $noPengaduan,
             ]);
 
             // Handle File Upload

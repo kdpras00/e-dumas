@@ -22,7 +22,7 @@
         </nav>
 
         <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-            <div class="bg-gradient-to-r from-blue-600 to-blue-800 px-8 py-6">
+            <div class="bg-gradient-to-br from-blue-600 to-blue-800 px-8 py-6">
                 <h2 class="text-2xl font-bold text-white">Tambah Kategori Baru</h2>
                 <p class="text-blue-100 text-sm mt-1">Silahkan isi form dibawah ini untuk menambahkan kategori baru.</p>
             </div>

@@ -21,19 +21,14 @@
     </nav>
 
     <!-- Header Card -->
-    <div class="bg-blue-700 rounded-2xl shadow-lg p-8 mb-8 text-white relative overflow-hidden">
-        <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <h1 class="text-3xl font-bold tracking-wide">Kelola Pengaduan</h1>
-                <p class="text-blue-100 mt-1 text-sm">Daftar semua pengaduan masyarakat</p>
-            </div>
+    <div class="bg-white rounded-3xl shadow-2xl mb-8 relative overflow-hidden border border-white/20">
+        <div class="p-10">
+            <h1 class="text-3xl font-bold text-blue-900 tracking-wide">Kelola Pengaduan</h1>
+            <p class="text-gray-500 mt-1 text-sm">Daftar semua pengaduan masyarakat</p>
         </div>
-        <!-- Decorative Circle -->
-        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"></div>
-        <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"></div>
     </div>
 
-    <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
+    <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden">
         <!-- Table -->
         <div class="p-8">
             <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
@@ -42,6 +37,7 @@
                         <tr>
                             <th scope="col" class="px-6 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider w-16">No</th>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Tanggal</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Nomor Tiket</th>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pelapor</th>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Kategori</th>
                             <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Subjek</th>
@@ -56,7 +52,10 @@
                                 {{ $index + 1 }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                                {{ $pengaduan->created_at->format('d M Y, H:i') }}
+                                {{ $pengaduan->created_at->format('d/m/Y') }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-blue-600 font-bold">
+                                #{{ $pengaduan->no_pengaduan }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-medium">
                                 @php
@@ -66,7 +65,7 @@
                                 {{ $reporter ? $reporter->nama_lengkap : 'Unknown' }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">
                                     {{ $pengaduan->kategori->kategori }}
                                 </span>
                             </td>
@@ -76,15 +75,15 @@
                             <td class="px-6 py-4 whitespace-nowrap text-center">
                                 @php
                                     $status = $pengaduan->latestDetail->status->status ?? 'Unknown';
-                                    $statusClass = match($status) {
-                                        'Open' => 'bg-yellow-100 text-yellow-800',
-                                        'On Progress' => 'bg-blue-100 text-blue-800',
-                                        'Resolved' => 'bg-green-100 text-green-800',
-                                        'Cancel' => 'bg-gray-100 text-gray-800',
-                                        default => 'bg-gray-100 text-gray-800'
+                                    $statusColor = match($status) {
+                                        'Open' => 'text-yellow-600',
+                                        'On Progress' => 'text-blue-600',
+                                        'Resolved' => 'text-green-600',
+                                        'Cancel' => 'text-red-500',
+                                        default => 'text-gray-500'
                                     };
                                 @endphp
-                                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full {{ $statusClass }}">
+                                <span class="text-xs font-bold {{ $statusColor }}">
                                     {{ ucfirst($status) }}
                                 </span>
                             </td>
@@ -99,7 +98,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-12 text-center text-gray-500">
+                            <td colspan="8" class="px-6 py-12 text-center text-gray-500">
                                 <p>Belum ada data pengaduan.</p>
                             </td>
                         </tr>

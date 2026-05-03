@@ -22,7 +22,7 @@
         </nav>
 
         <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-            <div class="bg-gradient-to-r from-blue-600 to-blue-800 px-8 py-6 flex justify-between items-center">
+            <div class="bg-gradient-to-br from-blue-600 to-blue-800 px-8 py-6 flex justify-between items-center">
                 <div>
                     <h2 class="text-2xl font-bold text-white">Edit User</h2>
                     <p class="text-blue-100 text-sm mt-1">Perbarui informasi user.</p>

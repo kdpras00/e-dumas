@@ -2,90 +2,83 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
-    <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 min-h-[600px] relative">
+    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-white/20 min-h-[600px] relative">
         <!-- Header -->
-        <div class="bg-gradient-to-r from-blue-600 to-blue-800 px-8 py-6 flex justify-between items-center">
+        <div class="px-8 py-10 flex justify-between items-center">
             <div>
-                <h1 class="text-3xl font-bold text-white tracking-wide">Laporan Pengaduan</h1>
-                <p class="text-blue-100 mt-1 text-sm">Riwayat pengaduan yang telah Anda kirimkan</p>
+                <h1 class="text-3xl font-bold text-blue-900 tracking-wide">Laporan Pengaduan</h1>
+                <p class="text-gray-500 mt-1 text-sm">Riwayat pengaduan yang telah Anda kirimkan</p>
             </div>
-            <a href="{{ route('pengaduan.create') }}" class="bg-white text-blue-700 font-bold py-2 px-6 rounded-full shadow-lg hover:bg-blue-50 hover:shadow-xl transition transform hover:-translate-y-0.5 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                Buat Pengaduan
-            </a>
+            <div>
+                <a href="{{ route('pengaduan.create') }}" class="bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold py-3.5 px-10 rounded-full shadow-lg hover:shadow-blue-500/30 transition transform hover:-translate-y-0.5">
+                    Buat Pengaduan
+                </a>
+            </div>
         </div>
 
         <!-- Table -->
         <div class="p-8">
-            <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-100">
+                    <thead>
                         <tr>
-                            <th scope="col" class="px-6 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider w-16">No</th>
-                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Tanggal</th>
-                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Nomor Tiket</th>
-                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Kategori</th>
-                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Subjek</th>
-                            <th scope="col" class="px-6 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
-                            <th scope="col" class="px-6 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">Aksi</th>
+                            <th scope="col" class="px-6 py-4 text-center text-xs font-bold text-gray-400 uppercase tracking-widest w-16">No</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">Tanggal</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">Nomor Tiket</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">Kategori</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">Subjek</th>
+                            <th scope="col" class="px-6 py-4 text-center text-xs font-bold text-gray-400 uppercase tracking-widest">Status</th>
+                            <th scope="col" class="px-6 py-4 text-center text-xs font-bold text-gray-400 uppercase tracking-widest">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="divide-y divide-gray-50">
                         @forelse($pengaduans as $index => $pengaduan)
-                        <tr class="hover:bg-blue-50/50 transition duration-150 group">
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-gray-500">
+                        <tr class="hover:bg-blue-50/30 transition duration-150 group">
+                            <td class="px-6 py-5 whitespace-nowrap text-center text-sm font-medium text-gray-400">
                                 {{ $index + 1 }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                                {{ $pengaduan->created_at->format('d M Y, H:i') }}
+                            <td class="px-6 py-5 whitespace-nowrap text-sm text-gray-500">
+                                {{ $pengaduan->created_at->format('d M Y') }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-blue-600 font-semibold group-hover:text-blue-800">
-                                #{{ $pengaduan->id }}
+                            <td class="px-6 py-5 whitespace-nowrap text-sm font-mono text-blue-600 font-bold group-hover:text-blue-800 transition">
+                                #{{ $pengaduan->no_pengaduan }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                            <td class="px-6 py-5 whitespace-nowrap text-sm text-gray-800">
+                                <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">
                                     {{ $pengaduan->kategori->kategori }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-medium">
+                            <td class="px-6 py-5 whitespace-nowrap text-sm text-gray-900 font-medium">
                                 {{ Str::limit($pengaduan->subject, 40) }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                            <td class="px-6 py-5 whitespace-nowrap text-center">
                                 @php
                                     $status = $pengaduan->latestDetail->status->status ?? 'Unknown';
-                                    $statusClass = match($status) {
-                                        'Open' => 'bg-yellow-100 text-yellow-800',
-                                        'On Progress' => 'bg-blue-100 text-blue-800',
-                                        'Resolved' => 'bg-green-100 text-green-800',
-                                        'Cancel' => 'bg-gray-100 text-gray-800',
-                                        default => 'bg-gray-100 text-gray-800'
+                                    $statusColor = match($status) {
+                                        'Open' => 'text-yellow-600',
+                                        'On Progress' => 'text-blue-600',
+                                        'Resolved' => 'text-green-600',
+                                        'Cancel' => 'text-red-500',
+                                        default => 'text-gray-500'
                                     };
                                 @endphp
-                                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full {{ $statusClass }}">
-                                    {{ ucfirst($status) }}
+                                <span class="text-xs font-bold {{ $statusColor }} uppercase tracking-wide">
+                                    {{ $status }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center">
-                                <a href="{{ route('pengaduan.show', $pengaduan->id) }}" class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white transition duration-200" title="Lihat Detail">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
+                            <td class="px-6 py-5 whitespace-nowrap text-center">
+                                <a href="{{ route('pengaduan.show', $pengaduan->id) }}" class="text-blue-600 hover:text-blue-800 font-bold text-xs uppercase tracking-widest transition">
+                                    Detail
                                 </a>
                             </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-12 text-center">
-                                <div class="flex flex-col items-center justify-center text-gray-500">
-                                    <svg class="w-12 h-12 mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-                                    </svg>
-                                    <p class="text-lg font-medium text-gray-900">Belum ada pengaduan</p>
-                                    <p class="text-sm mt-1">Silahkan buat pengaduan baru untuk menyampaikan aspirasi Anda.</p>
-                                    <a href="{{ route('pengaduan.create') }}" class="mt-4 text-blue-600 hover:text-blue-800 font-medium text-sm hover:underline">Buat Pengaduan Sekarang &rarr;</a>
+                            <td colspan="7" class="px-6 py-24 text-center">
+                                <div class="flex flex-col items-center justify-center text-gray-400">
+                                    <p class="text-xl font-bold text-gray-900">Belum ada pengaduan</p>
+                                    <p class="text-sm mt-2">Aspirasi Anda sangat berharga bagi kemajuan Kelurahan.</p>
+                                    <a href="{{ route('pengaduan.create') }}" class="mt-6 text-blue-600 hover:text-blue-800 font-bold text-sm uppercase tracking-widest transition">Buat Pengaduan &rarr;</a>
                                 </div>
                             </td>
                         </tr>

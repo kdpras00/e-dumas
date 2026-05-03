@@ -2,13 +2,16 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
-    <div class="bg-blue-200/50 rounded-lg p-6 mb-8 border border-blue-200 shadow-sm relative overflow-hidden">
-        <h1 class="text-3xl font-bold text-gray-800 italic relative z-10 tracking-wider">Petugas</h1>
-        <div class="h-1 bg-gray-500 w-full mt-2 opacity-20"></div>
+    <!-- Header Card -->
+    <div class="bg-white rounded-3xl shadow-2xl mb-8 relative overflow-hidden border border-white/20">
+        <div class="p-10">
+            <h1 class="text-3xl font-bold text-blue-900 tracking-wide">Data Petugas</h1>
+            <p class="text-gray-500 mt-2 text-sm">Manajemen akun petugas lapangan Kelurahan Dumai.</p>
+        </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-        <div class="p-4 flex justify-end bg-gray-50/50 border-b border-gray-100">
+    <div class="bg-white rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+        <div class="p-6 flex justify-end bg-gray-50/30 border-b border-gray-100">
             @if(auth()->user()->user_level_id == 3)
             <a href="{{ route('admin.petugas.create') }}" class="flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-bold py-2 px-4 rounded-full border border-gray-300 shadow-sm transition text-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
