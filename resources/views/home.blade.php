@@ -59,7 +59,7 @@
                             <div class="min-w-full md:min-w-[calc(33.333%-16px)] bg-white p-8 rounded-3xl border border-gray-100 flex flex-col hover:border-blue-200 transition">
                                 <!-- Top: Profile -->
                                 <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
-                                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-xs">{{ $userInitial }}</div>
+                                    <img src="{{ asset('images/default-profile.jpg') }}" alt="Profile" class="w-10 h-10 rounded-full object-cover border border-gray-100 shadow-sm">
                                     <div class="text-left">
                                         <p class="text-xs font-bold text-gray-900">{{ $userName }}</p>
                                         <p class="text-[10px] text-gray-500 font-medium">Warga</p>
@@ -133,8 +133,8 @@
                 <!-- Step 3 -->
                 <div class="text-center group">
                     <div class="flex items-center justify-center mx-auto mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        <svg class="h-12 w-12 text-blue-600" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19.146 4.854l-1.489 1.489A8 8 0 1 0 12 20a8.094 8.094 0 0 0 7.371-4.886 1 1 0 1 0-1.842-.779A6.071 6.071 0 0 1 12 18a6 6 0 1 1 4.243-10.243l-1.39 1.39a.5.5 0 0 0 .354.854H19.5A.5.5 0 0 0 20 9.5V5.207a.5.5 0 0 0-.854-.353z"></path>
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">3. Tindak Lanjut</h3>

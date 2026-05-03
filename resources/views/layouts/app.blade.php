@@ -32,10 +32,10 @@
 
             <!-- Center: Links (Only for Guests) -->
             <div class="flex-1 flex justify-center items-center gap-8 text-sm font-medium text-white">
-                @guest
-                    <a href="/" class="hover:text-blue-200 transition relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-200 after:transition-all hover:after:w-full">Beranda</a>
-                    <a href="{{ route('about') }}" class="hover:text-blue-200 transition relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-200 after:transition-all hover:after:w-full">Tentang E-DUMAS</a>
-                @endguest
+                <a href="/" class="hover:text-blue-200 transition relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-200 after:transition-all hover:after:w-full">Beranda</a>
+                <a href="{{ route('about') }}" class="hover:text-blue-200 transition relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-200 after:transition-all hover:after:w-full">Tentang E-DUMAS</a>
+                <a href="{{ route('tracking') }}" class="hover:text-blue-200 transition relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-200 after:transition-all hover:after:w-full">Lacak Pengaduan</a>
+
             </div>
 
             <!-- Right: Auth Actions -->
@@ -47,12 +47,21 @@
                 @endguest
 
                 @auth
-                    <form action="{{ route('logout') }}" method="POST" class="inline">
-                        @csrf
-                        <button type="submit" class="bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-2.5 rounded-full hover:bg-white hover:text-red-600 transition-all font-bold shadow-lg flex items-center gap-2 group uppercase tracking-widest text-xs">
-                            Logout
-                        </button>
-                    </form>
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20">
+                            <img src="{{ asset('images/default-profile.jpg') }}" alt="Profile" class="h-8 w-8 rounded-full object-cover border-2 border-white/50 shadow-sm">
+                            <div class="hidden md:block text-left">
+                                <p class="text-[10px] font-bold text-white leading-none uppercase tracking-wider">{{ auth()->user()->username }}</p>
+                                <p class="text-[9px] text-blue-200 font-medium leading-none mt-1">{{ auth()->user()->level->user_level }}</p>
+                            </div>
+                        </div>
+                        <form action="{{ route('logout') }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="bg-white/20 backdrop-blur-md text-white border border-white/30 px-6 py-2.5 rounded-full hover:bg-white hover:text-red-600 transition-all font-bold shadow-lg flex items-center gap-2 group uppercase tracking-widest text-xs">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
                 @endauth
             </div>
         </div>

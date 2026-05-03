@@ -4,10 +4,16 @@
 <div class="container mx-auto px-4 py-8">
     <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-white/20 min-h-[600px] relative">
         <!-- Header -->
-        <div class="px-8 py-10 flex justify-between items-center">
-            <div>
-                <h1 class="text-3xl font-bold text-blue-900 tracking-wide">Laporan Pengaduan</h1>
-                <p class="text-gray-500 mt-1 text-sm">Riwayat pengaduan yang telah Anda kirimkan</p>
+        <div class="px-8 py-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div class="flex items-center gap-5">
+                <div class="relative">
+                    <img src="{{ asset('images/default-profile.jpg') }}" alt="Profile" class="h-16 w-16 rounded-2xl object-cover border-2 border-white shadow-xl">
+                    <div class="absolute -bottom-1 -right-1 bg-green-500 w-4 h-4 rounded-full border-2 border-white"></div>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-bold text-blue-900 tracking-wide">Laporan Pengaduan</h1>
+                    <p class="text-gray-500 mt-0.5 text-sm">Halo, <span class="font-bold text-blue-600">{{ auth()->user()->nama_lengkap }}</span>! Pantau riwayat pengaduan Anda di sini.</p>
+                </div>
             </div>
             <div>
                 <a href="{{ route('pengaduan.create') }}" class="bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold py-3.5 px-10 rounded-full shadow-lg hover:shadow-blue-500/30 transition transform hover:-translate-y-0.5">

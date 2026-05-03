@@ -21,6 +21,10 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/tracking', [\App\Http\Controllers\TrackingController::class, 'index'])->name('tracking');
+Route::post('/tracking', [\App\Http\Controllers\TrackingController::class, 'track'])->name('tracking.post');
+Route::get('/tracking/result/{no_pengaduan}', [\App\Http\Controllers\TrackingController::class, 'showResult'])->name('tracking.result');
+
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->name('password.request');

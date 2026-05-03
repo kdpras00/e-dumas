@@ -61,8 +61,11 @@
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-gray-500">
                                 {{ $index + 1 }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-800">
-                                {{ $user->username }}
+                             <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img src="{{ asset('images/default-profile.jpg') }}" alt="Avatar" class="h-8 w-8 rounded-full object-cover mr-3 border border-gray-200">
+                                    <div class="text-sm font-semibold text-gray-800">{{ $user->username }}</div>
+                                </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                                 {{ $user->nama_lengkap }}

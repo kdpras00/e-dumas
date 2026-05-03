@@ -28,10 +28,14 @@
 
     <!-- Header Card -->
     <div class="bg-blue-700 rounded-2xl shadow-lg p-8 mb-8 text-white relative overflow-hidden">
-        <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <h1 class="text-3xl font-bold tracking-wide">Detail User</h1>
-                <p class="text-blue-100 mt-1 text-sm">Informasi lengkap pengguna aplikasi</p>
+        <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
+            <div class="relative">
+                <img src="{{ asset('images/default-profile.jpg') }}" alt="Profile" class="h-24 w-24 rounded-2xl object-cover border-4 border-white/30 shadow-2xl">
+                <div class="absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 rounded-full border-4 border-blue-700"></div>
+            </div>
+            <div class="text-center md:text-left">
+                <h1 class="text-3xl font-bold tracking-wide">{{ $user->nama_lengkap }}</h1>
+                <p class="text-blue-100 mt-1 text-sm">@ {{ $user->username }} • {{ $user->level->user_level }}</p>
             </div>
         </div>
         <!-- Decorative Circle -->
