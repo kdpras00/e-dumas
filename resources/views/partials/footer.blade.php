@@ -28,9 +28,8 @@
             <div>
                 <h4 class="text-lg font-bold mb-6 font-poppins">Layanan</h4>
                 <ul class="space-y-4 text-gray-400 text-sm">
-                    <li><a href="#" class="hover:text-blue-500 transition">Pengaduan Online</a></li>
-                    <li><a href="#" class="hover:text-blue-500 transition">Cek Status Laporan</a></li>
-                    <li><a href="#" class="hover:text-blue-500 transition">Informasi Publik</a></li>
+                    <li><a href="{{ route('login') }}" class="hover:text-blue-500 transition">Buat Pengaduan</a></li>
+                    <li><a href="{{ route('tracking') }}" class="hover:text-blue-500 transition">Lacak Pengaduan</a></li>
                 </ul>
             </div>
 
